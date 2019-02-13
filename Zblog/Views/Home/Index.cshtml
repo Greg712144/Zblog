@@ -1,0 +1,124 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Zblog.Models.BlogPost>
+
+
+<!-- Hero Section-->
+<section style= "background: url('../../img/what-is-spotsinn.png'); background-size: cover; background-position: center center" class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <h1>Welcome To My Blog!</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<br />
+<br />
+
+<section class="featured-posts no-padding-top">
+    <div class="container">
+        @foreach (var blog in Model)
+        {<!-- Post-->
+            if (blog.Published == true)
+            {
+                <div class="row d-flex align-items-stretch">
+                    <div class="text col-lg-7">
+                        <div class="text-inner d-flex align-items-center">
+                            <div class="content">
+
+                                <header class="post-header">
+                                    <div class="category"></div>
+                                    <a href="@Url.Action("Details", "BlogPosts", new { slug = blog.Slug })">
+                                        <h2 class="h4">
+                                            @blog.Title
+                                        </h2>
+                                    </a>
+                                </header>
+                                <p>
+                                    @blog.Abstract
+
+
+                                </p>
+                                <footer class="post-footer d-flex align-items-center">
+                                    <a href="#" class="author d-flex align-items-center flex-wrap">
+
+                                        <div class="title"><strong><span>by Greg Zambrana</span></strong></div>
+                                    </a>
+                                    @*<div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                                    <div class="comments"><i class="icon-comment"></i>12</div>*@
+                                    <div class="created">Created on: @blog.Created.ToString("MM/dd/yy")</div>
+                                </footer>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image col-lg-5">
+                        @if (blog.MediaUrl != null)
+                        {
+
+                            <img class="img-responsive" src="@blog.MediaUrl" alt="...">
+
+                        }
+                    </div>
+                </div>
+            }
+            <hr/>
+        }
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+        {
+                <div class="search-area">
+                    <div class="form-group">
+                        <input type="text" class ="input-block-level" name="searchStr" id="searchStr">
+                        <button type="submit" class="btn btn-light"><i class="icon-search-1"></i></button>
+                    </div>
+                </div>
+        }
+
+        Page@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        <br />
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchStr = ViewBag.Search }))
+
+    </div>
+
+</section>
+<!-- Divider Section-->
+@*<section style="background:url('../../img/divider-bg.jpg');
+        background-size: cover;
+        background-position: center bottom" class="divider">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h2>Join Now!</h2>
+                <strong>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</strong>
+            </div>
+        </div>
+    </div>
+ </section>*@
+   
+ @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+        <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
+        <link href = "~/Content/PagesList.css" rel = "stylesheet"/>
+
+        <script>
+        $(function ()
+        {
+            tinymce.init({
+                selector: '#Body'
+            });
+        });
+
+
+
+        </script>
+
+    }
+
+
+
+

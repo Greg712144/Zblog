@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Zblog.Models.BlogPost>
+
+@{
+    /**/
+
+    ViewBag.Title = "My Blog!";
+}
+
+<h2>Blog List</h2>
+
+@if (User.IsInRole("Admin"))
+{
+
+    <p>
+        <strong>@Html.ActionLink("Create New", "Create")</strong>
+
+
+    </p>
+}
+
+
+<table class="table">
+
+    @Html.AntiForgeryToken()
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Updated)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Abstract)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slug)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MediaUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Published)
+        </th>
+        <th></th>
+    </tr>
+
+
+
+    @foreach (var BlogPost in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => BlogPost.Created)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => BlogPost.Updated)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => BlogPost.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => BlogPost.Abstract)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => BlogPost.Slug)
+            </td>
+            <td>
+                @Html.Raw(BlogPost.Body)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => BlogPost.MediaUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => BlogPost.Published)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = BlogPost.Id }) |
+                @Html.ActionLink("Details", "Details", new { slug = BlogPost.Slug }) |
+                @Html.ActionLink("Delete", "Delete", new { id = BlogPost.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+

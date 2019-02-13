@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Zblog.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Comments</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Author.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BlogPost.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Updated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateReason)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var Comment in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Comment.Author.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Comment.BlogPost.Title)
+        </td>
+        <td>
+            @Html.Raw(Comment.Body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Comment.Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Comment.Updated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Comment.UpdateReason)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = Comment.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = Comment.ID}) |
+            @Html.ActionLink("Delete", "Delete", new { id = Comment.ID })
+        </td>
+    </tr>
+}
+
+</table>

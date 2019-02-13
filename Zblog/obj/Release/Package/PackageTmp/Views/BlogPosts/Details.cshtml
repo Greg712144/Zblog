@@ -1,0 +1,135 @@
+﻿@model Zblog.Models.BlogPost
+  
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- Latest Posts -->
+            <main class="post blog-post col-lg-8">
+                <div class="container">
+                    <div class="post-single">
+                        <div class="post-thumbnail">
+                            @if (Model.MediaUrl != null)
+                            {
+                                <img class="img-fluid" src="@Model.MediaUrl" alt="...">
+                            }
+                        </div>
+                        <div class="post-details">
+                            <h1>@Model.Title</h1>
+                            <div class="post-footer d-flex align-items-center flex-column flex-sm-row">
+
+                                <a href="#" class="author d-flex align-items-center flex-wrap">
+                                    <div class="blog"><span> by Greg Zambrana</span></div>
+                                </a>
+
+                            </div>
+                            <hr />
+                            <div class="post-body">
+                                @Html.Raw(Model.Body)
+
+                            </div>
+                            <hr />
+                            <h2>Comments</h2>
+                            <hr />
+
+                            @foreach (var Comment in Model.Comments.OrderByDescending(c => c.Created))
+                            {
+                                <p>@Html.Raw(Comment.Body)</p>
+                                <p><b>Commented on @Comment.Created.ToString("MM/dd/yy") by @Comment.Author.Email</b></p>
+
+                                if (User.IsInRole( "Admin") || (User.IsInRole("Moderator")))
+                                {
+                                    <p>@Html.ActionLink("Edit", "Edit", "Comments", null, new { id = "EditLink"}) / @Html.ActionLink("Delete", "Delete", "Comments", null, new { id = "DeleteLink" })</p>
+                                }
+                                <hr />
+                            }
+
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("Create", "Comments", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken();
+                                    @Html.HiddenFor(model => model.Id);
+                                    @Html.HiddenFor(model => model.Slug);
+
+
+                                    @*<div class="form-group">
+                    @Html.Label("Add Comment", htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-10">
+                        @Html.Editor("CommentBody")
+                    </div>
+                </div>
+                <br />
+                <button type="submit" class=" btn btn-primary">Submit</button>*@
+                                    <div class="add-comment">
+                                        <header>
+                                            <h3 class="h6">Leave a comment!</h3>
+                                        </header>
+                                        <form action="#" class="commenting-form">
+                                            <div class="row">
+                                                @*<div class="form-group col-md-6">
+                                                    <input type="text" name="username" id="username" placeholder="Name" class="form-control">
+                                                </div>*@
+                                                <div class="form-group col-md-12">
+                                                    @Html.Editor("commentBody")
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <button type="submit" class="btn btn-info">Submit Comment</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                }
+                            }
+                            @*<div class="add-comment">
+            <header>
+                <h3 class="h6">Leave a comment!</h3>
+            </header>
+            <form action="#" class="commenting-form">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <input type="text" name="username" id="username" placeholder="Name" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <textarea name="usercomment" id="usercomment" placeholder="Type your comment" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-secondary">Submit Comment</button>
+                    </div>
+                </div>
+            </form>
+        </div>*@
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+        <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
+
+        <script>
+            $(function () {
+                tinymce.init({
+                    selector: '#commentBody'
+                });
+            });
+
+
+
+        </script>
+
+    }
+
+
+</body>
+</html>
