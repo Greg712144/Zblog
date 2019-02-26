@@ -43,6 +43,7 @@
 
                                 if (User.IsInRole( "Admin") || (User.IsInRole("Moderator")))
                                 {
+                                    // pass in correct values to send to correct page when clicked on
                                     <p>@Html.ActionLink("Edit", "Edit", "Comments") / @Html.ActionLink("Delete", "Delete", "Comments")</p>
                                 }
                                 <hr />
