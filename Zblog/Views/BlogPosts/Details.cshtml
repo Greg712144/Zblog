@@ -1,5 +1,5 @@
 ﻿@model Zblog.Models.BlogPost
-  
+  @using PagedList;
 
 <!DOCTYPE html>
 <html>
@@ -36,7 +36,7 @@
                             <h2>Comments</h2>
                             <hr />
 
-                            @foreach (var Comment in Model.Comments.OrderByDescending(c => c.Created))
+                            @foreach (var Comment in Model.Comments.OrderByDescending(c => c.Created).ToPagedList(1,3))
                             {
                                 <p>@Html.Raw(Comment.Body)</p>
                                 <p><b>Commented on @Comment.Created.ToString("MM/dd/yy") by @Comment.Author.Email</b></p>
@@ -58,7 +58,7 @@
                                     @Html.HiddenFor(model => model.Id);
                                     @Html.HiddenFor(model => model.Slug);
 
-                                    <div class="add-comment">
+                                    <div class="add-comment" id="addComment">
                                         <header>
                                             <h3 class="h6">Leave a comment!</h3>
                                         </header>
@@ -69,7 +69,7 @@
                                                     @Html.Editor("commentBody")
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <button type="submit" class="btn btn-info">Submit Comment</button>
+                                                    <button type="submit" id="addCom" class="btn btn-info">Submit Comment</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -95,7 +95,9 @@
                     selector: '#commentBody'
                 });
             });
-
+            $("#addCom").submit(){
+                
+            }
 
 
         </script>

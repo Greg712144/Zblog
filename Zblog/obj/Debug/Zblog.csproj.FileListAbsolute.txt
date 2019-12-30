@@ -108,8 +108,8 @@ C:\Users\gregoriozambrana1\source\repos\Zblog\Zblog\bin\Microsoft.Owin.Security.
 C:\Users\gregoriozambrana1\source\repos\Zblog\Zblog\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\gregoriozambrana1\source\repos\Zblog\Zblog\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\gregoriozambrana1\source\repos\Zblog\Zblog\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\gregoriozambrana1\source\repos\Zblog\Zblog\obj\Debug\Zblog.csprojAssemblyReference.cache
 C:\Users\gregoriozambrana1\source\repos\Zblog\Zblog\obj\Debug\Zblog.csproj.CoreCompileInputs.cache
 C:\Users\gregoriozambrana1\source\repos\Zblog\Zblog\obj\Debug\Zblog.csproj.CopyComplete
 C:\Users\gregoriozambrana1\source\repos\Zblog\Zblog\obj\Debug\Zblog.dll
 C:\Users\gregoriozambrana1\source\repos\Zblog\Zblog\obj\Debug\Zblog.pdb
-C:\Users\gregoriozambrana1\source\repos\Zblog\Zblog\obj\Debug\Zblog.csprojAssemblyReference.cache

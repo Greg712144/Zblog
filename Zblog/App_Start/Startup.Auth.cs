@@ -67,7 +67,7 @@ namespace Zblog
                 ClientSecret = "vch3zqaHvJ9pVJMHv7hNR8p9"
             });
 
-            app.UseLinkedInAuthentication("78xnc5o8tm8i6y", "iUBL2zVHemwQAPdd");
+            app.UseLinkedInAuthentication("781r6qnnvgvpxg", "wDKBPhVpHU1bMgS7");
 
             app.UseGitHubAuthentication("5af89303f8b43f6d2cb6", "3758d8aa9b11c4271a4edc12c36f5e6ba540e3da");
         }

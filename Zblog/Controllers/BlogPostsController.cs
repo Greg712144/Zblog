@@ -46,6 +46,7 @@ namespace Zblog.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(blogPost);
         }
 
@@ -69,6 +70,7 @@ namespace Zblog.Controllers
                 if (ImageUploadValidator.IsWebFriendlyImage(image))
                 {
                     var fileName = Path.GetFileName(image.FileName);
+                    fileName = Path.GetFileNameWithoutExtension(fileName) + "_" + DateTime.Now.Ticks + Path.GetExtension(fileName);
                     image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
                     blogPost.MediaUrl = "/Uploads/" + fileName;
                 }

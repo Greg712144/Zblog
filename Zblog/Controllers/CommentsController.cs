@@ -73,7 +73,7 @@ namespace Zblog.Controllers
               
             }
 
-            return RedirectToAction("Details", "BlogPosts", new { slug = slug });
+            return RedirectToAction("Details", "BlogPosts", new { slug });
         }
 
         // GET: Comments/Edit/5
